@@ -1,0 +1,40 @@
+{
+    "ModName": "Character Appearance Presets",
+    "ModDescription": "",
+    "SchemaVersion": 1,
+    "Tabs": [
+        {
+            "TabId": "cap_root",
+            "TabName": "General",
+            "Settings": [
+                {
+                    "Id": "cap_text",
+                    "Name": "Filename",
+                    "Description": "The filename of the preset to save or load.\nPresets are saved to \"%localappdata%/Larian Studios/Baldur's Gate 3/Script Extender/CharacterAppearancePresets\".",
+                    "Type": "text",
+                    "Default": "placeholder.json"
+                },
+                {
+                    "Id": "cap_save_button",
+                    "Name": "Save Preset",
+                    "Description": "Save the preset of the currently selected character.\nCan only be used in-game.",
+                    "Type": "event_button",
+                    "Options": {
+                        "ConfirmDialog": {
+                            "Title": "Save Preset",
+                            "Message": "This may overwrite your existing file.",
+                            "ConfirmText": "Confirm",
+                            "CancelText": "Cancel"
+                        }
+                    }
+                },
+                {
+                    "Id": "cap_load_button",
+                    "Name": "Load Preset",
+                    "Description": "Load an existing preset. Editing the appearance of your character after loading the preset will reset their appearance.\nCan only be used during character creation.",
+                    "Type": "event_button"
+                }
+            ]
+        }
+    ]
+}
