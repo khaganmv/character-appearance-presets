@@ -50,16 +50,32 @@ local function SavePreset(filename)
     }
 end
 
+local function LoadPresetInCharacterCreation(p)
+    if not Utils.IsCompatibleOrigin(p.Origin) then
+        error({ message = "Character and preset origins are incompatible."})
+    end
+    
+    Preset.SetInCharacterCreation(p)
+end 
+
+local function LoadPresetInGame(p)
+    if not Utils.IsCompatibleRaceAndSubrace(p.Race, p.Subrace) then
+        error({ message = "Character and preset race and subrace are incompatible." })
+    end
+    
+    Preset.SetInGame(p)
+end 
+
 local function LoadPreset(filename)
-    if not Utils.IsInCharacterCreation() then
+    if not Utils.IsInCharacterCreation() and not Utils.IsInGame() then
         return {
             success = false,
-            message = "Presets can only be loaded during character creation."
+            message = "Presets can only be loaded during character creation or in-game."
         }
     end
     
     local success, json = pcall(Ext.IO.LoadFile, MOD_DIRECTORY .. filename)
-    if not json then
+    if not success then
         return {
             success = false,
             message = "Could not find file " .. filename .. "."
@@ -74,18 +90,16 @@ local function LoadPreset(filename)
         }
     end
 
-    if not Utils.IsCompatibleOrigin(preset.Origin) then
-        return {
-            success = false,
-            message = "Character and preset origins are incompatible."
-        }
+    local success, err
+    if Utils.IsInCharacterCreation() then
+        success, err = pcall(LoadPresetInCharacterCreation, preset)
+    elseif Utils.IsInGame() then
+        success, err = pcall(LoadPresetInGame, preset)
     end
-
-    local success = pcall(Preset.Set, preset)
     if not success then
         return {
             success = false,
-            message = "Invalid JSON format."
+            message = err.message
         }
     end
 

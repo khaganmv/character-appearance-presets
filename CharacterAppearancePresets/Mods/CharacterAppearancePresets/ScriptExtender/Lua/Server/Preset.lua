@@ -25,7 +25,7 @@ function Preset.Get()
     }
 end
 
-function Preset.Set(p)
+function Preset.SetInCharacterCreation(p)
     local e = Ext.Entity.GetAllEntitiesWithComponent("CCCharacterDefinition")[1]
     local d = e.CCCharacterDefinition
 
@@ -48,6 +48,32 @@ function Preset.Set(p)
     d.ChangeId = (d.ChangeId or 0) + 1
 
     e:Replicate("CCCharacterDefinition")
+end
+
+function Preset.SetInGame(p)
+    local c = Ext.Entity.Get(Osi.GetHostCharacter())
+    local cs = c:GetAllComponents()
+
+    cs.CustomIcon.Icon = Base64.Decode(p.Icon)
+    cs.CharacterCreationAppearance.AdditionalChoices = p.AdditionalChoices
+    cs.CharacterCreationAppearance.Elements = p.Elements
+    cs.CharacterCreationAppearance.Visuals = p.Visuals
+    cs.CharacterCreationAppearance.EyeColor = p.EyeColor
+    cs.CharacterCreationAppearance.HairColor = p.HairColor
+    cs.CharacterCreationAppearance.SecondEyeColor = p.SecondEyeColor
+    cs.CharacterCreationAppearance.SkinColor = p.SkinColor
+    cs.CharacterCreationStats.BodyShape = p.BodyShape
+    cs.CharacterCreationStats.BodyType = p.BodyType
+    cs.GameObjectVisual.RootTemplateId = p.RootTemplateId
+    cs.Voice.Voice = p.Voice
+    cs.LevelUp.LevelUps[1].AccessorySet = p.AccessorySet
+
+    c:Replicate("CustomIcon")
+    c:Replicate("CharacterCreationAppearance")
+    c:Replicate("CharacterCreationStats")
+    c:Replicate("GameObjectVisual")
+    c:Replicate("Voice")
+    c:Replicate("LevelUp")
 end
 
 return Preset

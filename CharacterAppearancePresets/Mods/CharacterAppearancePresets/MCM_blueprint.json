@@ -10,14 +10,14 @@
                 {
                     "Id": "cap_text",
                     "Name": "Filename",
-                    "Description": "The filename of the preset to save or load.\nPresets are saved to \"%localappdata%/Larian Studios/Baldur's Gate 3/Script Extender/CharacterAppearancePresets\".",
+                    "Description": "The filename of the preset to save or load.\nPresets are stored in \"%localappdata%/Larian Studios/Baldur's Gate 3/Script Extender/CharacterAppearancePresets\".",
                     "Type": "text",
                     "Default": "placeholder.json"
                 },
                 {
                     "Id": "cap_save_button",
                     "Name": "Save Preset",
-                    "Description": "Save the preset of the currently selected character.\nCan only be used in-game.",
+                    "Description": "Save the preset of the currently selected character. Can only be used in-game.",
                     "Type": "event_button",
                     "Options": {
                         "ConfirmDialog": {
@@ -31,7 +31,7 @@
                 {
                     "Id": "cap_load_button",
                     "Name": "Load Preset",
-                    "Description": "Load an existing preset. Editing the appearance of your character after loading the preset will reset their appearance.\nCan only be used during character creation.",
+                    "Description": "Load an existing preset. Can be used in-game or during character creation.\nIf used during character creation, changes will only become visible once in the nautiloid.\nDuring character creation, editing the appearance of your character after loading the preset will reset their appearance.",
                     "Type": "event_button"
                 }
             ]
