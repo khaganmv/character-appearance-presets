@@ -55,6 +55,7 @@ function Preset.SetInGame(p)
     local cs = c:GetAllComponents()
 
     cs.CustomIcon.Icon = Base64.Decode(p.Icon)
+    cs.ServerCCCustomIcon.Icon = Base64.Decode(p.Icon)
     cs.CharacterCreationAppearance.AdditionalChoices = p.AdditionalChoices
     cs.CharacterCreationAppearance.Elements = p.Elements
     cs.CharacterCreationAppearance.Visuals = p.Visuals
